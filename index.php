@@ -107,10 +107,10 @@
                 </div>
                 <form action="login.php" method="POST" id="Login">
                     <div class="form-group">
-                        <input type="text" value="<?php if(isset($_COOKIE["user"])){echo $_COOKIE["user"];} ?>" name="username" class="form-control" id="inputEmail" placeholder="Email Address">
+                        <input type="text" value="<?php if(isset($_COOKIE["user"])){echo $_COOKIE["user"];} ?>" name="username" class="form-control" id="inputEmail" placeholder="Insert Username">
                     </div>
                     <div class="form-group">
-                        <input type="password" value="<?php if(isset($_COOKIE["pass"])){echo $_COOKIE["pass"];} ?>" name="password" class="form-control" id="inputPassword" placeholder="Password">
+                        <input type="password" value="<?php if(isset($_COOKIE["pass"])){echo $_COOKIE["pass"];} ?>" name="password" class="form-control" id="inputPassword" placeholder="Insert Password">
                     </div>  
                     <div class="form-group" style="text-align: left;">
                     <label><input type="checkbox" name="remember" >Remember Me</label>
