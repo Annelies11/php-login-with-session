@@ -17,7 +17,7 @@ if(isset($_POST['login'])){
         }
 
         $_SESSION['id']=$row['user_id'];
-        header('Location:success.php');
+        header('Location:admin.php');
     }
 } else {
     header('Location:index.php');
