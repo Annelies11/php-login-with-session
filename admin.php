@@ -36,6 +36,7 @@
         <?php echo $row['user_email'];?>
         <br>
         <a href="logout.php">Logout</a>
+        <br>
         <span>
                         <?php
                         if(isset($_SESSION['message'])){
