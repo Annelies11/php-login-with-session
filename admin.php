@@ -7,6 +7,7 @@
     include('conn.php');
     $query=mysqli_query($conn, "SELECT * FROM user_cookies WHERE user_id='".$_SESSION['id']."'");
     $row=mysqli_fetch_assoc($query);
+    $i = 1;
 ?>
 <!doctype html>
 <html lang="en">
@@ -52,8 +53,10 @@
         <div class="col">
           <div class="card mt-5">
             <div class="card-header">
-              <h2 class="display-6 text-center" style="font-family: century gothic;">Member of Conggress</h2>
+              <h2 class="display-6 text-center" style="font-family: century gothic;">Member of Conggress
+              <a style="position: relative; float: right; margin-top: 10px;" onclick="" class="btn btn-primary" data-toggle="modal" data-target="#insertModal"><span class="material-symbols-outlined">add</span></a></h2>
             </div>
+            
             <div class="card-body">
               <table class="table table-bordered text-center">
                 <tr class="table-dark text-white">
@@ -73,7 +76,7 @@
                   while($row = mysqli_fetch_assoc($res))
                   {?>
 
-                  <td><?php echo $row['id']; ?></td>
+                  <td><?php echo $i; ?></td>
                   <td><?php echo $row['name']; ?></td>
                   <td><?php echo $row['address']; ?></td>
                   <td><?php echo $row['email']; ?></td>
@@ -107,7 +110,9 @@
                   </form>
                   <?php
                     if(isset($_POST['update'])){
+
                       $id = $_POST['id'];
+                      
                       $name = $_POST['name'];
                       $address = $_POST['address'];
                       $email = $_POST['email'];
@@ -127,12 +132,51 @@
                   
 
                   <?php
+                  $i++;
                   }
                   ?>
                   
-                
               </table>
-              
+              <form action="" method="POST">
+                  <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="insertModalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div  class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Insert Data</h5>
+                        </div>
+                        <div class="modal-body">
+                        <h4 class="form-heading">Name :</h4>
+                        <input type="Text" value="" name="name" class="form-control" id="" >
+                        <h4 class="form-heading">Address :</h4>
+                        <input type="Text" value="" name="address" class="form-control" id="">
+                        <h4 class="form-heading">Email :</h4>
+                        <input type="Text" value="" name="email" class="form-control" id="">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary" name="insert">Insert</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </form>
+                  <?php
+                    if(isset($_POST['insert'])){
+                      
+                      $name = $_POST['name'];
+                      $address = $_POST['address'];
+                      $email = $_POST['email'];
+
+                      $sql = "INSERT INTO sample (name, address, email) VALUES ('$name','$address','$email')";
+                      $res = mysqli_query($conn, $sql);
+                      if(!$res){
+                        trigger_error("Error bro :".mysqli_error($res));
+                      } else {
+                        $_SESSION['message']="Insert success!";
+                        echo "<meta http-equiv='refresh' content=0.1; url=?page=admin>";
+                      }
+                    }
+                  ?>
               
             </div>
           </div>
